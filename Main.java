@@ -1,13 +1,12 @@
 import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
 class Main {
   public static void main(String[] args) throws IOException {
-    Path[] paths = Files.walk(Paths.get(args[0])).filter(Files::isRegularFile).toArray(Path[]::new);
+    Path[] paths = Arrays.stream(args).map(p -> Path.of(p)).toArray(Path[]::new);
     Tokenizer tokenizer = new RegexTokenizer("[ ,.?\n{}()\"\']+");
     SimpleSearchEngine engine = new SimpleSearchEngine(paths, tokenizer);
     Scanner scanner = new Scanner(System.in);

@@ -5,12 +5,15 @@ import java.util.List;
 import java.util.Scanner;
 
 class Main {
+  /**
+   * @param args Paths to files which should be included in the corpus.
+   * @throws IOException
+   */
   public static void main(String[] args) throws IOException {
     Path[] paths = Arrays.stream(args).map(p -> Path.of(p)).toArray(Path[]::new);
     Tokenizer tokenizer = new RegexTokenizer("[ ,.?\n{}()\"\']+");
     SimpleSearchEngine engine = new SimpleSearchEngine(paths, tokenizer);
     Scanner scanner = new Scanner(System.in);
-    System.out.println("");
     String input = "";
     while (true) {
       System.out.print("Search: ");
